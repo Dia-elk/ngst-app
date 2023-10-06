@@ -23,7 +23,18 @@ class School extends Model
         return $this->hasOne(Address::class);
     }
 
-   public function classRooms():HasMany{
+    public function classRooms(): HasMany
+    {
         return $this->hasMany(ClassRoom::class);
-   }
+    }
+
+    public function teachers(): HasMany
+    {
+        return $this->hasMany(Teacher::class);
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }

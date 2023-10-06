@@ -7,29 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ClassRoom extends Model
+class Teacher extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'degree_id',
+        'user_id',
         'school_id',
+        'subject_id',
     ];
 
-    public function school(): BelongsTo
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function school():BelongsTo
     {
         return $this->belongsTo(School::class);
     }
-
-    public function degree(): BelongsTo
+    public function subject():BelongsTo
     {
-        return $this->belongsTo(Degree::class);
-    }
-
-    public function classRoomStudents(): HasMany
-    {
-        return $this->hasMany(ClassRoomStudent::class);
+        return $this->belongsTo(Subject::class);
     }
 
     public function lessons():HasMany
@@ -37,7 +36,7 @@ class ClassRoom extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    public function homeWork():HasMany
+    public function homeWorks():HasMany
     {
         return $this->hasMany(HomeWork::class);
     }
@@ -46,6 +45,4 @@ class ClassRoom extends Model
     {
         return $this->hasMany(Exam::class);
     }
-
-
 }
